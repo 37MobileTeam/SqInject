@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'com.sq.sqinject'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+                argument "applicationId", "com.sqinject.test_lib"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation project(':annotation')
+    implementation project(':library')
+    annotationProcessor project(":compile")
+//    annotationProcessor 'com.37sy.android:sqinject-compile:1.0.0'
+//    implementation 'com.37sy.android:sqinject:1.0.0'
+}

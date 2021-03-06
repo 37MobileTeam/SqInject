@@ -1,0 +1,44 @@
+apply plugin: 'java-library'
+
+def libraryVersion = '1.0.0'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+
+// java控制台输出中文乱码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+publishing {
+    publications {
+        main(MavenPublication) {
+            from components.java
+            groupId = rootProject.ext.artifactory_groupId
+            artifactId "sqinject-annotation"
+            version = libraryVersion
+            artifact "${project.buildDir}/libs/${project.name}.jar"
+        }
+    }
+}
+
+artifactory {
+    contextUrl = rootProject.ext.artifactory_address
+    publish {
+        repository {
+            repoKey = rootProject.ext.artifactory_repoKey
+            username = rootProject.ext.artifactory_user
+            password = rootProject.ext.artifactory_password
+        }
+        defaults {
+            publications 'main'
+            publishArtifacts = false
+            publishPom = false //Publish generated POM files to Artifactory (true by default)
+            publishIvy = false //Publish generated Ivy descriptor files to Artifactory (true by default)
+        }
+    }
+}

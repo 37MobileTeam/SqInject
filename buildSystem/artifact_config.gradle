@@ -1,0 +1,16 @@
+/*
+* artifact_config.gradle文件配置主要包括几方面
+* 1. artifactory私有库地址,repoKey,账户信息;
+*/
+
+allprojects {
+
+  ext {
+    artifactory_address = 'http://www.azact.com/artifactory'
+    artifactory_user = 'zhuxiaoxin'
+    artifactory_password = '123456'
+    artifactory_repoKey = 'sy_dev_libs'
+    artifactory_groupId = 'com.37sy.android'
+  }
+
+}

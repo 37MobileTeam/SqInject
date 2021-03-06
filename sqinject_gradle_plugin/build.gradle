@@ -1,0 +1,62 @@
+apply plugin: 'groovy'
+/*
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+*/
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+def libraryVersion = '1.0.0'
+dependencies {
+    compileOnly gradleApi()
+    implementation "com.android.tools.build:gradle:3.4.1"
+
+}
+
+sourceSets {
+    main {
+        groovy.srcDirs=['src/main/groovy']
+        resources.srcDirs=['src/main/resources']
+    }
+}
+
+/*//调试修改、发布在本地仓库
+publishing {
+    publications {
+        plugin(MavenPublication) {
+            from components.java
+            group 'com.sq.sqinject'
+            artifactId "gradleplugin"
+            version = libraryVersion
+        }
+    }
+}*/
+
+publishing {
+    publications {
+        main(MavenPublication) {
+            from components.java
+            groupId = rootProject.ext.artifactory_groupId
+            artifactId "sqinject-gradle-plugin"
+            version = libraryVersion
+            artifact "${project.buildDir}/libs/${project.name}.jar"
+        }
+    }
+}
+artifactory {
+    contextUrl = rootProject.ext.artifactory_address
+    publish {
+        repository {
+            repoKey = rootProject.ext.artifactory_repoKey
+            username = rootProject.ext.artifactory_user
+            password = rootProject.ext.artifactory_password
+        }
+        defaults {
+            publications 'main'
+            publishArtifacts = false
+            publishPom = false //Publish generated POM files to Artifactory (true by default)
+            publishIvy = false //Publish generated Ivy descriptor files to Artifactory (true by default)
+        }
+    }
+}

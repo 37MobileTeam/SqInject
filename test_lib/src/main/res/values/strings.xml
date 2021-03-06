@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">test_lib</string>
+    <integer name="appId">5</integer>
+    <color name="white">#30F5F5</color>
+</resources>

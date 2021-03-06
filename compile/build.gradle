@@ -1,0 +1,55 @@
+apply plugin: 'java-library'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+def libraryVersion = '1.0.0'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly 'com.google.auto.service:auto-service:1.0-rc6'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
+    //低版本gradle可能出现can not found method annotationProcessor
+
+    implementation 'com.squareup:javapoet:1.10.0'
+    implementation project(':annotation')
+}
+
+shadowJar {
+    zip64 true
+}
+
+// java控制台输出中文乱码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+
+publishing {
+    publications {
+        main(MavenPublication) {
+            from components.java
+            groupId = rootProject.ext.artifactory_groupId
+            artifactId "sqinject-compile"
+            version = libraryVersion
+            artifact shadowJar
+        }
+    }
+}
+
+artifactory {
+    contextUrl = rootProject.ext.artifactory_address
+    publish {
+        repository {
+            repoKey = rootProject.ext.artifactory_repoKey
+            username = rootProject.ext.artifactory_user
+            password = rootProject.ext.artifactory_password
+        }
+        defaults {
+            publications 'main'
+            publishArtifacts = false
+            publishPom = false //Publish generated POM files to Artifactory (true by default)
+            publishIvy = false //Publish generated Ivy descriptor files to Artifactory (true by default)
+        }
+    }
+}

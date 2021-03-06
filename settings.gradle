@@ -1,0 +1,1 @@
+include ':app', ':annotation', ':library', ':compile', ':test_lib', ':sqinject_gradle_plugin'

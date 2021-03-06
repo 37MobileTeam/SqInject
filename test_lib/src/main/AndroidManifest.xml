@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sqinject.test_lib">
+
+    <application>
+        <activity android:name="com.sqinject.test_lib.TestActivity"/>
+    </application>
+
+</manifest>
