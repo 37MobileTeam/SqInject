@@ -202,3 +202,7 @@ https://developer.android.com/studio/releases/gradle-plugin?hl=zh-cn
 如果您对我们感兴趣，欢迎加群和我们交流
 
 ![12711615026029_.pic](./12711615026029_.pic.jpg)
+
+群二维码失效，可以加个人微信，再加进群哈
+
+![12891615258362_.pic](./12891615258362_.pic.jpg)
