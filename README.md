@@ -199,6 +199,6 @@ SqR.java：../SqInject/app/build/generated/source/sqr/debug/com/sqinject/demo/Sq
 更多参考：Android Gradle 插件版本说明
 https://developer.android.com/studio/releases/gradle-plugin?hl=zh-cn
 
-如果您对我们感兴趣，欢迎加群和我们交流
+如果您对我们感兴趣，欢迎联系小编加入我们
 
 ![12711615026029_.pic](./aszz.png)
