@@ -201,4 +201,4 @@ https://developer.android.com/studio/releases/gradle-plugin?hl=zh-cn
 
 如果您对我们感兴趣，欢迎加群和我们交流
 
-![12711615026029_.pic](./aszz.jpg)
+![12711615026029_.pic](./aszz.png)
